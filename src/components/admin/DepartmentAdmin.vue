@@ -10,16 +10,16 @@
                 </b-col>
                 <b-col md="3" sm="12">
                     <b-form-group label="Secretaria" label-for="department-name">
-                        <b-form-select :options="secretariats" value-field="id" text-field="initial"></b-form-select>
+                        <b-form-select v-model="department.secretaryId" :options="secretariats" value-field="id" text-field="initial"></b-form-select>
                     </b-form-group>
                 </b-col>
             </b-row>
             <b-row>
-                <b-col md="3" sm="12">
+                <b-col md="6" sm="12">
                     <b-button variant="primary" class="mr-2" v-if="mode === 'save' || mode === 'remove'"
                         @click="save">Salvar</b-button>
                      <b-button variant="danger" class="mr-2" v-if="mode === 'remove'"
-                        @click="save">Remover</b-button>
+                        @click="remove">Remover</b-button>
                     <b-button v-if="mode === 'remove'"
                         @click="reset">Cancelar</b-button>
                 </b-col>
@@ -72,6 +72,30 @@ export default {
                 this.secretariats = res.data.data
             })
         },
+        save() {
+            const method = this.department.id ? 'put' : 'post'
+            const id = this.department.id ? `/${this.department.id}` : ''
+            axios[method](`${baseApiUrl}/departments/${id}`, this.department)
+                .then(() => {
+                    this.$toasted.global.defaultSuccess()
+                    this.reset()
+                })
+                .catch(showError)
+        },
+        reset() {
+            this.mode = 'save'
+            this.department = {}
+            this.loadDepartments()
+        },
+        remove() {
+            const id = this.department.id
+            axios.delete(`${baseApiUrl}/departments/${id}`)
+                .then(() => {
+                    this.$toasted.global.defaultSuccess()
+                    this.reset()
+                })
+                .catch(showError)
+        }
 
     }, watch: {
         page() {

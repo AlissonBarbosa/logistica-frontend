@@ -15,7 +15,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col md="3" sm="12">
+                <b-col md="6" sm="12">
                     <b-button variant="primary" class="mr-2" v-if="mode === 'save' || mode === 'remove'"
                         @click="save">Salvar</b-button>
                      <b-button variant="danger" class="mr-2" v-if="mode === 'remove'"

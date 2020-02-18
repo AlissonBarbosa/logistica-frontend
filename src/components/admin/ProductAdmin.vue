@@ -22,7 +22,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col md="3" sm="12">
+                <b-col md="6" sm="12">
                     <b-button variant="primary" class="mr-2" v-if="mode === 'save' || mode === 'remove'"
                         @click="save">Salvar</b-button>
                      <b-button variant="danger" class="mr-2" v-if="mode === 'remove'"
@@ -34,7 +34,8 @@
         </b-form>
         <br>
         <b-pagination size="md" v-model="page" :total-rows="count" :per-page="limit" />
-        <b-table hover striped :items="products" :fields="fields" @row-clicked="loadProduct" />
+        <b-table hover striped :items="products" :fields="fields" @row-clicked="loadProduct">
+        </b-table>
     </div>
 </template>
 
@@ -57,6 +58,7 @@ export default {
                 {key: 'make', label: 'Marca'},
                 {key: 'model', label: 'Modelo'},
                 {key: 'quantity', label: 'Quantidade'},
+                { key: 'actions', label: 'Ações' }
             ]
         }
     },
