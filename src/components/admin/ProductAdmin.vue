@@ -58,7 +58,6 @@ export default {
                 {key: 'make', label: 'Marca'},
                 {key: 'model', label: 'Modelo'},
                 {key: 'quantity', label: 'Quantidade'},
-                { key: 'actions', label: 'Ações' }
             ]
         }
     },
